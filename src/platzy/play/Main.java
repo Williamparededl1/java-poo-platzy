@@ -10,11 +10,9 @@ public class Main {
         System.out.println("PELICULAS !!!!! ");
 
         Pelicula pelicula = new Pelicula();
-<<<<<<< HEAD
-        pelicula.titulo = "La Era del hielo en el git 2";
-=======
+
         pelicula.titulo = "La Era del hielo rama 2 para la prueebaa";
->>>>>>> practicas-objetos
+
         pelicula.anioEstreno = 2002;
         pelicula.genero = "Animacion";
         pelicula.calificar(4.5);
