@@ -10,7 +10,11 @@ public class Main {
         System.out.println("PELICULAS !!!!! ");
 
         Pelicula pelicula = new Pelicula();
+<<<<<<< HEAD
         pelicula.titulo = "La Era del hielo en el git 2";
+=======
+        pelicula.titulo = "La Era del hielo rama 2 para la prueebaa";
+>>>>>>> practicas-objetos
         pelicula.anioEstreno = 2002;
         pelicula.genero = "Animacion";
         pelicula.calificar(4.5);
@@ -25,7 +29,11 @@ public class Main {
 //        Scanner scanner  = new Scanner(System.in);
 //
 //        System.out.println("Cual es tu nombre?");
+<<<<<<< HEAD
 //`
+=======
+//
+>>>>>>> practicas-objetos
 //        String nombre = scanner.nextLine();
 //
 //        System.out.println("Ya era hora de aprender java "+ nombre +" buen viaje");
