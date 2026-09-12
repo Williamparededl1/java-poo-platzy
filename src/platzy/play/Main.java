@@ -2,6 +2,7 @@ package platzy.play;
 
 import platzy.play.contenido.Pelicula;
 import platzy.play.plataforma.Usuario;
+import platzy.play.util.ScannerUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,23 +12,20 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("PELICULAS !!!!! ");
 
+
+
+
+        String nombrePelicula = ScannerUtils.capturarTexto("cual es nombre de la pelicula que quiere ver");
+        String generoPelicula = ScannerUtils.capturarTexto("Que genero es la pelicula que quiere ver");
+        int duracionPelicula = ScannerUtils.capturarNumero("Cuanto dura la pelicula mins ");
+        double calificacionPelicula = ScannerUtils.capturarDecimal("tu calificacion  del 1 - 5");
+
         Pelicula pelicula = new Pelicula();
-        pelicula.titulo = "Monster INC  2";
+        pelicula.titulo = nombrePelicula;
         pelicula.fechaEstreno = LocalDate.of(2006,10,14);
-        pelicula.genero = "Animacion";
-        pelicula.calificar(4.5);
-        pelicula.duraCion = 120;
-
-        long duracionlog = pelicula.duraCion;
-        int calificacionInt = (int) pelicula.calificacion;
-        long numeroPremios = Long.parseLong("11");
-
-        System.out.println("Long "+duracionlog);
-        System.out.println("calificacionInt "+calificacionInt);
-        System.out.println("numeroPremios "+numeroPremios);
-
-
-
+        pelicula.genero = generoPelicula;
+        pelicula.calificar(calificacionPelicula);
+        pelicula.duraCion = duracionPelicula;
 
         System.out.println(pelicula.obtenerFichaTecnica());
 
@@ -38,19 +36,7 @@ public class Main {
         usuario.ver(pelicula);
         System.out.println(usuario.fechaRegistro);
 
-//        Scanner scanner  = new Scanner(System.in);
-//
-//        System.out.println("Cual es tu nombre?");
-//
-//        String nombre = scanner.nextLine();
-//
-//        System.out.println("Ya era hora de aprender java "+ nombre +" buen viaje");
-//
-//        System.out.println(nombre +" cual es tu edad?");
-//
-//        Integer edad = scanner.nextInt();
-//
-//        System.out.println(edad +" mmmm ya estas viejo");
+
 
 
     }
