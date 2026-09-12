@@ -23,19 +23,18 @@ public class Main {
         int duracionPelicula = ScannerUtils.capturarNumero("Cuanto dura la pelicula mins ");
         double calificacionPelicula = ScannerUtils.capturarDecimal("tu calificacion  del 1 - 5");
 
-        Pelicula pelicula = new Pelicula();
-        pelicula.titulo = nombrePelicula;
-        pelicula.fechaEstreno = LocalDate.of(2006,10,14);
-        pelicula.genero = generoPelicula;
-        pelicula.calificar(calificacionPelicula);
-        pelicula.duraCion = duracionPelicula;
+
+        Pelicula pelicula = new Pelicula(nombrePelicula,duracionPelicula,generoPelicula,calificacionPelicula);
+
 
         System.out.println(pelicula.obtenerFichaTecnica());
 
-        Usuario  usuario = new Usuario();
-        usuario.nombre = "Juan";
-        usuario.fechaRegistro = LocalDateTime.now();
+        String nombreUsuario = ScannerUtils.capturarTexto("cual es nombre tu nombre");
+        String emailUsuario = ScannerUtils.capturarTexto("ingresa tu correo");
 
+        Usuario  usuario = new Usuario(nombreUsuario,emailUsuario);
+
+@
         usuario.ver(pelicula);
         System.out.println(usuario.fechaRegistro);
 
