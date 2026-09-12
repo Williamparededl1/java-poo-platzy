@@ -16,6 +16,18 @@ public class Main {
         pelicula.fechaEstreno = LocalDate.of(2006,10,14);
         pelicula.genero = "Animacion";
         pelicula.calificar(4.5);
+        pelicula.duraCion = 120;
+
+        long duracionlog = pelicula.duraCion;
+        int calificacionInt = (int) pelicula.calificacion;
+        long numeroPremios = Long.parseLong("11");
+
+        System.out.println("Long "+duracionlog);
+        System.out.println("calificacionInt "+calificacionInt);
+        System.out.println("numeroPremios "+numeroPremios);
+
+
+
 
         System.out.println(pelicula.obtenerFichaTecnica());
 
