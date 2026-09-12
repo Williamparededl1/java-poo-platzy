@@ -9,8 +9,11 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
+    public static final String NOMBRE_PLATAFORMA = "PELICULAS PLATZY";
+    public static final String VERSION = "1.0.0";
+
     public static void main(String[] args) {
-        System.out.println("PELICULAS !!!!! ");
+        System.out.println(NOMBRE_PLATAFORMA+" v:" +VERSION);
 
 
 
