@@ -3,6 +3,8 @@ package platzy.play;
 import platzy.play.contenido.Pelicula;
 import platzy.play.plataforma.Usuario;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +13,7 @@ public class Main {
 
         Pelicula pelicula = new Pelicula();
         pelicula.titulo = "Monster INC  2";
-        pelicula.anioEstreno = 2002;
+        pelicula.fechaEstreno = LocalDate.of(2006,10,14);
         pelicula.genero = "Animacion";
         pelicula.calificar(4.5);
 
@@ -19,8 +21,10 @@ public class Main {
 
         Usuario  usuario = new Usuario();
         usuario.nombre = "Juan";
+        usuario.fechaRegistro = LocalDateTime.now();
 
         usuario.ver(pelicula);
+        System.out.println(usuario.fechaRegistro);
 
 //        Scanner scanner  = new Scanner(System.in);
 //
