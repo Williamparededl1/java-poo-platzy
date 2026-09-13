@@ -34,7 +34,7 @@ public class Main {
 
         Usuario  usuario = new Usuario(nombreUsuario,emailUsuario);
 
-@
+
         usuario.ver(pelicula);
         System.out.println(usuario.fechaRegistro);
 
