@@ -25,8 +25,19 @@ public class Plataforma {
         }
     }
 
-    public void eliminarContenido(Pelicula pelicula) {
-        contenido.remove(pelicula);
+    public boolean eliminarContenido(Pelicula pelicula) {
+        boolean isRemove = false;
+        isRemove = contenido.remove(pelicula);
+        return isRemove;
+    }
+
+    public Pelicula buscarPorTitulo(String titulo) {
+        for (Pelicula pelicula : contenido) {
+            if (pelicula.getTitulo().equalsIgnoreCase(titulo)) {
+                return pelicula;
+            }
+        }
+        return null;
     }
 
     public List<Pelicula> getContenidos() {
