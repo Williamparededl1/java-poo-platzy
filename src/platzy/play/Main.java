@@ -2,7 +2,6 @@ package platzy.play;
 
 import platzy.play.contenido.Pelicula;
 import platzy.play.plataforma.Plataforma;
-import platzy.play.plataforma.Usuario;
 import platzy.play.util.ScannerUtils;
 
 import java.util.List;
@@ -15,6 +14,9 @@ public class Main {
     public static final int MOSTRAR_TODO = 2;
     public static final int BUSCAR_PELICULA = 3;
     public static final int BUSCAR_GENERO = 4;
+    public static final int POLULARES = 5;
+    public static final int MEJOR_VALORADAS = 6;
+    public static final int MAS_DURACION = 7;
     public static final int ELIMINAR_PELICULA = 8;
     public static final int SALIR = 9;
 
@@ -24,15 +26,19 @@ public class Main {
 
         while(true){
 
-            System.out.println(NOMBRE_PLATAFORMA+" v:" +VERSION);
+            System.out.println(NOMBRE_PLATAFORMA+" v:" +VERSION+"\n");
+            System.out.println("Mas de "+plataforma.getDuracionTotal()+" minutos de Entretenimiento");
 
             int opcionElegida = ScannerUtils.capturarNumero("""
-                    System.out.println(NOMBRE_PLATAFORMA+" v:" +VERSION);
+                    
                     Ingrese una opcion:
                     1. Agregar Pelicula
                     2. Mostrar Todo
                     3. Buscar por titulo
                     4. Buscar por genero
+                    5. Mas Popularas
+                    6. Mejor volardas
+                    7. Con mas Duracion
                     8. Eliminar Pelicula
                     9. Salir
                     """);
@@ -48,8 +54,16 @@ public class Main {
 
                     plataforma.agregarContenido(new Pelicula(nombrePelicula, duracionPelicula, generoPelicula, calificacionPelicula));
                 }
-                case MOSTRAR_TODO -> plataforma.mostrarContenido();
+                case MOSTRAR_TODO -> {
 
+                    List<String> titulos = plataforma.getTitulos();
+                    System.out.println("tenemos "+titulos.size()+" peliculas en "+plataforma.getNombre());
+                    if (!titulos.isEmpty()) {
+                        titulos.forEach(System.out::println);
+                    }
+
+
+                }
                 case BUSCAR_PELICULA -> {
                     String nombrePelicula = ScannerUtils.capturarTexto("cual es nombre de la pelicula que quieres buscar");
                     Pelicula pelicula = plataforma.buscarPorTitulo(nombrePelicula);
@@ -70,6 +84,33 @@ public class Main {
                         peliculas.forEach((contenido) -> System.out.println(contenido.obtenerFichaTecnica() +"\n"));
                     }
 
+
+                }
+                case POLULARES -> {
+
+                    int cantidad = ScannerUtils.capturarNumero("Cantidad de resultados a mostrar");
+                    List<Pelicula> Rankig = plataforma.getPopulares(cantidad);
+                    System.out.println("tenemos "+Rankig.size()+" Rankeadas en "+plataforma.getNombre());
+                    if (!Rankig.isEmpty()) {
+                        Rankig.forEach((contenido) -> System.out.println(contenido.obtenerFichaTecnica() +"\n"));
+                    }
+
+                }
+
+                case MEJOR_VALORADAS -> {
+
+                    List<Pelicula> Rankig = plataforma.getValoradas();
+                    System.out.println("tenemos "+Rankig.size()+" con de 4.5 en "+plataforma.getNombre());
+                    if (!Rankig.isEmpty()) {
+                        Rankig.forEach((contenido) -> System.out.println(contenido.obtenerFichaTecnica() +"\n"));
+                    }
+                }
+
+                case MAS_DURACION -> {
+
+                    Pelicula duracion = plataforma.getMasLarga();
+                    System.out.println("Con una duracion de "+ duracion.getDuraCion() + " tenemos ha: \n");
+                    System.out.println(duracion.obtenerFichaTecnica());
 
                 }
                 case ELIMINAR_PELICULA -> {

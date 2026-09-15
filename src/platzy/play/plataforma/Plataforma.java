@@ -3,6 +3,7 @@ package platzy.play.plataforma;
 import platzy.play.contenido.Pelicula;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Plataforma {
@@ -19,10 +20,11 @@ public class Plataforma {
         contenido.add(pelicula);
     }
 
-    public void mostrarContenido() {
+    public List<String> getTitulos() {
 
-
-        contenido.forEach((Pelicula pelicula) -> System.out.println(pelicula.obtenerFichaTecnica()));
+        return contenido.stream()
+                .map(Pelicula::getTitulo)
+                .toList();
     }
 
     public boolean eliminarContenido(Pelicula pelicula) {
@@ -45,6 +47,40 @@ public class Plataforma {
         return contenido.stream()
                 .filter((contenido) -> contenido.getGenero().equalsIgnoreCase(genero))
                 .toList();
+    }
+
+    public List<Pelicula> getPopulares (int cantidad) {
+
+        return contenido.stream()
+                .sorted(Comparator.comparingDouble(Pelicula::getCalificacion).reversed())
+                .limit(cantidad)
+                .toList();
+
+    }
+
+    public List<Pelicula> getValoradas () {
+
+        return contenido.stream()
+                .filter((contenido) -> contenido.getCalificacion() > 4.8)
+                .sorted(Comparator.comparingDouble(Pelicula::getCalificacion).reversed())
+                .toList();
+
+    }
+
+    public Pelicula getMasLarga() {
+        return contenido.stream()
+                .max(Comparator.comparing(Pelicula::getDuraCion))
+                .orElse(null);
+
+    }
+
+
+    public int getDuracionTotal(){
+
+        return contenido.stream()
+                .mapToInt(Pelicula::getDuraCion)
+                .sum();
+
     }
 
 
