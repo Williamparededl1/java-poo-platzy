@@ -20,9 +20,9 @@ public class Plataforma {
     }
 
     public void mostrarContenido() {
-        for (Pelicula pelicula : contenido) {
-            System.out.println(pelicula.obtenerFichaTecnica());
-        }
+
+
+        contenido.forEach((Pelicula pelicula) -> System.out.println(pelicula.obtenerFichaTecnica()));
     }
 
     public boolean eliminarContenido(Pelicula pelicula) {
@@ -32,13 +32,21 @@ public class Plataforma {
     }
 
     public Pelicula buscarPorTitulo(String titulo) {
-        for (Pelicula pelicula : contenido) {
-            if (pelicula.getTitulo().equalsIgnoreCase(titulo)) {
-                return pelicula;
-            }
-        }
-        return null;
+
+        return  contenido.stream()
+                .filter((contenido) -> contenido.getTitulo().equalsIgnoreCase(titulo))
+                .findFirst()
+                .orElse(null);
+
     }
+
+    public List<Pelicula> buscarPorGenero(String genero) {
+
+        return contenido.stream()
+                .filter((contenido) -> contenido.getGenero().equalsIgnoreCase(genero))
+                .toList();
+    }
+
 
     public List<Pelicula> getContenidos() {
         return contenido;

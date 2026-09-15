@@ -5,6 +5,7 @@ import platzy.play.plataforma.Plataforma;
 import platzy.play.plataforma.Usuario;
 import platzy.play.util.ScannerUtils;
 
+import java.util.List;
 
 
 public class Main {
@@ -13,8 +14,9 @@ public class Main {
     public static final int AGREGAR_PELICULA = 1;
     public static final int MOSTRAR_TODO = 2;
     public static final int BUSCAR_PELICULA = 3;
-    public static final int ELIMINAR_PELICULA = 4;
-    public static final int SALIR = 5;
+    public static final int BUSCAR_GENERO = 4;
+    public static final int ELIMINAR_PELICULA = 8;
+    public static final int SALIR = 9;
 
     public static void main(String[] args) {
         Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
@@ -30,8 +32,9 @@ public class Main {
                     1. Agregar Pelicula
                     2. Mostrar Todo
                     3. Buscar por titulo
-                    4. Eliminar Pelicula
-                    5. Salir
+                    4. Buscar por genero
+                    8. Eliminar Pelicula
+                    9. Salir
                     """);
             System.out.println("Opcion Elegida: "+ opcionElegida);
 
@@ -58,11 +61,22 @@ public class Main {
                     }
 
                 }
+                case BUSCAR_GENERO -> {
+                    String nombreGenero = ScannerUtils.capturarTexto("Que genero de peliculas estas buscando");
+                    List<Pelicula> peliculas = plataforma.buscarPorGenero(nombreGenero);
+
+                    System.out.println("tenemos "+peliculas.size()+" de ese genero");
+                    if (!peliculas.isEmpty()) {
+                        peliculas.forEach((contenido) -> System.out.println(contenido.obtenerFichaTecnica() +"\n"));
+                    }
+
+
+                }
                 case ELIMINAR_PELICULA -> {
                     String nombrePelicula = ScannerUtils.capturarTexto("cual es nombre de la pelicula que quieres eliminnar");
                     Pelicula peliculaEliminar = plataforma.buscarPorTitulo(nombrePelicula);
 
-                    if (pelicula != null) {
+                    if (peliculaEliminar != null) {
                         boolean eliminar = plataforma.eliminarContenido(peliculaEliminar);
                         if (eliminar){
                             System.out.println("La pelicula "+nombrePelicula+" ha sido eliminada");
