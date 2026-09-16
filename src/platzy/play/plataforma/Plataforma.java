@@ -1,5 +1,6 @@
 package platzy.play.plataforma;
 
+import platzy.play.contenido.Genero;
 import platzy.play.contenido.Pelicula;
 
 import java.util.ArrayList;
@@ -42,10 +43,10 @@ public class Plataforma {
 
     }
 
-    public List<Pelicula> buscarPorGenero(String genero) {
+    public List<Pelicula> buscarPorGenero(Genero genero) {
 
         return contenido.stream()
-                .filter((contenido) -> contenido.getGenero().equalsIgnoreCase(genero))
+                .filter((contenido) -> contenido.getGenero().equals(genero))
                 .toList();
     }
 

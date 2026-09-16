@@ -1,5 +1,6 @@
 package platzy.play;
 
+import platzy.play.contenido.Genero;
 import platzy.play.contenido.Pelicula;
 import platzy.play.plataforma.Plataforma;
 import platzy.play.util.ScannerUtils;
@@ -46,8 +47,8 @@ public class Main {
 
             switch (opcionElegida){
                 case AGREGAR_PELICULA -> {
-                    String nombrePelicula = ScannerUtils.capturarTexto("cual es nombre de la pelicula que quiere ver");
-                    String generoPelicula = ScannerUtils.capturarTexto("Que genero es la pelicula que quiere ver");
+                    String nombrePelicula = ScannerUtils.capturarTexto("cual es nombre de la pelicula que quieres agregar");
+                    Genero generoPelicula = ScannerUtils.capturarGenero("Que genero es la pelicula quieres agregar");
                     int duracionPelicula = ScannerUtils.capturarNumero("Cuanto dura la pelicula mins ");
                     double calificacionPelicula = ScannerUtils.capturarDecimal("tu calificacion  del 1 - 5");
 
@@ -76,7 +77,7 @@ public class Main {
 
                 }
                 case BUSCAR_GENERO -> {
-                    String nombreGenero = ScannerUtils.capturarTexto("Que genero de peliculas estas buscando");
+                    Genero nombreGenero = ScannerUtils.capturarGenero("Que genero es la pelicula que quiere ver");
                     List<Pelicula> peliculas = plataforma.buscarPorGenero(nombreGenero);
 
                     System.out.println("tenemos "+peliculas.size()+" de ese genero");
@@ -100,7 +101,7 @@ public class Main {
                 case MEJOR_VALORADAS -> {
 
                     List<Pelicula> Rankig = plataforma.getValoradas();
-                    System.out.println("tenemos "+Rankig.size()+" con de 4.5 en "+plataforma.getNombre());
+                    System.out.println("tenemos "+Rankig.size()+" peliculas con mas de 4.8 en "+plataforma.getNombre());
                     if (!Rankig.isEmpty()) {
                         Rankig.forEach((contenido) -> System.out.println(contenido.obtenerFichaTecnica() +"\n"));
                     }
@@ -138,20 +139,23 @@ public class Main {
     }
 
     private static void cargarDatosIniciales(Plataforma plataforma){
-        plataforma.agregarContenido(new Pelicula("Spider-Man: A través del Spider-Verso", 140, "Acción", 4.8));
-        plataforma.agregarContenido(new Pelicula("Avengers: Endgame", 181, "Acción", 4.7));
-        plataforma.agregarContenido(new Pelicula("The Batman", 176, "Crimen", 4.6));
-        plataforma.agregarContenido(new Pelicula("Interestelar", 169, "Ciencia Ficción", 4.9));
-        plataforma.agregarContenido(new Pelicula("El Señor de los Anillos: La Comunidad del Anillo", 178, "Fantasía", 4.9));
-        plataforma.agregarContenido(new Pelicula("Gladiador", 155, "Acción", 4.7));
-        plataforma.agregarContenido(new Pelicula("Top Gun: Maverick", 130, "Acción", 4.5));
-        plataforma.agregarContenido(new Pelicula("Oppenheimer", 180, "Drama", 4.8));
-        plataforma.agregarContenido(new Pelicula("Spider-Man: Sin camino a casa", 148, "Acción", 4.6));
-        plataforma.agregarContenido(new Pelicula("John Wick 4", 169, "Acción", 4.4));
-        plataforma.agregarContenido(new Pelicula("Dune: Parte Dos", 166, "Ciencia Ficción", 4.9));
-        plataforma.agregarContenido(new Pelicula("Batman Begins", 140, "Acción", 4.5));
-        plataforma.agregarContenido(new Pelicula("The Dark Knight", 152, "Acción", 5.0));
-        plataforma.agregarContenido(new Pelicula("Matrix", 136, "Ciencia Ficción", 4.8));
-        plataforma.agregarContenido(new Pelicula("Inception", 148, "Ciencia Ficción", 4.8));
+        plataforma.agregarContenido(new Pelicula("Spider-Man: A través del Spider-Verso", 140, Genero.ANIMACION, 4.8));
+        plataforma.agregarContenido(new Pelicula("Avengers: Endgame", 181, Genero.ACCION, 4.7));
+        plataforma.agregarContenido(new Pelicula("The Batman", 176, Genero.SUSPENSO, 4.6));
+        plataforma.agregarContenido(new Pelicula("Interestelar", 169, Genero.CIENCIA_FICCION, 4.9));
+        plataforma.agregarContenido(new Pelicula("El Señor de los Anillos: La Comunidad del Anillo", 178, Genero.FANTASIA, 4.9));
+        plataforma.agregarContenido(new Pelicula("Gladiador", 155, Genero.DRAMA, 4.7));
+        plataforma.agregarContenido(new Pelicula("Top Gun: Maverick", 130, Genero.ACCION, 4.5));
+        plataforma.agregarContenido(new Pelicula("Oppenheimer", 180, Genero.DRAMA, 4.8));
+        plataforma.agregarContenido(new Pelicula("Spider-Man: Sin camino a casa", 148, Genero.AVENTURA, 4.6));
+        plataforma.agregarContenido(new Pelicula("John Wick 4", 169, Genero.ACCION, 4.4));
+        plataforma.agregarContenido(new Pelicula("Dune: Parte Dos", 166, Genero.FANTASIA, 4.9));
+        plataforma.agregarContenido(new Pelicula("Batman Begins", 140, Genero.ACCION, 4.5));
+        plataforma.agregarContenido(new Pelicula("The Dark Knight", 152, Genero.ACCION, 5.0));
+        plataforma.agregarContenido(new Pelicula("Matrix", 136, Genero.CIENCIA_FICCION, 4.8));
+        plataforma.agregarContenido(new Pelicula("Inception", 148, Genero.CIENCIA_FICCION, 4.8));
+        plataforma.agregarContenido(new Pelicula("Como si Fuera la primera vez", 130, Genero.ROMANTICA, 5));
+        plataforma.agregarContenido(new Pelicula("Loco por Merry", 148, Genero.ROMANTICA, 3));
+        plataforma.agregarContenido(new Pelicula("Actividad Paranormal", 148, Genero.TERROR, 4));
     }
 }
