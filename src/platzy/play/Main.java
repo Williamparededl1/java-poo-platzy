@@ -2,6 +2,7 @@ package platzy.play;
 
 import platzy.play.contenido.Genero;
 import platzy.play.contenido.Pelicula;
+import platzy.play.contenido.ResumenContenido;
 import platzy.play.excepcion.PeliculaExistenteException;
 import platzy.play.plataforma.Plataforma;
 import platzy.play.util.ScannerUtils;
@@ -63,10 +64,10 @@ public class Main {
                 }
                 case MOSTRAR_TODO -> {
 
-                    List<String> titulos = plataforma.getTitulos();
+                    List<ResumenContenido> titulos = plataforma.getResumenes();
                     System.out.println("tenemos "+titulos.size()+" peliculas en "+plataforma.getNombre());
                     if (!titulos.isEmpty()) {
-                        titulos.forEach(System.out::println);
+                        titulos.forEach((resumen) -> System.out.println(resumen.titulo()+" - "+resumen.genero()+" - "+resumen.duracion()+ " mins"));
                     }
 
 
@@ -116,7 +117,7 @@ public class Main {
                 case MAS_DURACION -> {
 
                     Pelicula duracion = plataforma.getMasLarga();
-                    System.out.println("Con una duracion de "+ duracion.getDuraCion() + " tenemos ha: \n");
+                    System.out.println("Con una duracion de "+ duracion.getDuracion() + " tenemos ha: \n");
                     System.out.println(duracion.obtenerFichaTecnica());
 
                 }

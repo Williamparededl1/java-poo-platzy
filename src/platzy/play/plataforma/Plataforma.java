@@ -2,6 +2,7 @@ package platzy.play.plataforma;
 
 import platzy.play.contenido.Genero;
 import platzy.play.contenido.Pelicula;
+import platzy.play.contenido.ResumenContenido;
 import platzy.play.excepcion.PeliculaExistenteException;
 
 import java.util.ArrayList;
@@ -33,6 +34,11 @@ public class Plataforma {
 
         return contenido.stream()
                 .map(Pelicula::getTitulo)
+                .toList();
+    }
+    public List<ResumenContenido> getResumenes() {
+        return contenido.stream()
+                .map(pelicula -> new ResumenContenido(pelicula.getTitulo(), pelicula.getGenero(), pelicula.getDuracion()))
                 .toList();
     }
 
@@ -78,7 +84,7 @@ public class Plataforma {
 
     public Pelicula getMasLarga() {
         return contenido.stream()
-                .max(Comparator.comparing(Pelicula::getDuraCion))
+                .max(Comparator.comparing(Pelicula::getDuracion))
                 .orElse(null);
 
     }
@@ -87,7 +93,7 @@ public class Plataforma {
     public int getDuracionTotal(){
 
         return contenido.stream()
-                .mapToInt(Pelicula::getDuraCion)
+                .mapToInt(Pelicula::getDuracion)
                 .sum();
 
     }

@@ -55,7 +55,7 @@ public class Pelicula {
         return descripcion;
     }
 
-    public int getDuraCion() {
+    public int getDuracion() {
         return duraCion;
     }
 
