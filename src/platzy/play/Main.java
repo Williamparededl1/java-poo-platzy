@@ -5,8 +5,13 @@ import platzy.play.contenido.Pelicula;
 import platzy.play.contenido.ResumenContenido;
 import platzy.play.excepcion.PeliculaExistenteException;
 import platzy.play.plataforma.Plataforma;
+import platzy.play.util.FileUtils;
 import platzy.play.util.ScannerUtils;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -160,23 +165,6 @@ public class Main {
     }
 
     private static void cargarDatosIniciales(Plataforma plataforma){
-        plataforma.agregarContenido(new Pelicula("Spider-Man: A través del Spider-Verso", 140, Genero.ANIMACION, 4.8));
-        plataforma.agregarContenido(new Pelicula("Avengers: Endgame", 181, Genero.ACCION, 4.7));
-        plataforma.agregarContenido(new Pelicula("The Batman", 176, Genero.SUSPENSO, 4.6));
-        plataforma.agregarContenido(new Pelicula("Interestelar", 169, Genero.CIENCIA_FICCION, 4.9));
-        plataforma.agregarContenido(new Pelicula("El Señor de los Anillos: La Comunidad del Anillo", 178, Genero.FANTASIA, 4.9));
-        plataforma.agregarContenido(new Pelicula("Gladiador", 155, Genero.DRAMA, 4.7));
-        plataforma.agregarContenido(new Pelicula("Top Gun: Maverick", 130, Genero.ACCION, 4.5));
-        plataforma.agregarContenido(new Pelicula("Oppenheimer", 180, Genero.DRAMA, 4.8));
-        plataforma.agregarContenido(new Pelicula("Spider-Man: Sin camino a casa", 148, Genero.AVENTURA, 4.6));
-        plataforma.agregarContenido(new Pelicula("John Wick 4", 169, Genero.ACCION, 4.4));
-        plataforma.agregarContenido(new Pelicula("Dune: Parte Dos", 166, Genero.FANTASIA, 4.9));
-        plataforma.agregarContenido(new Pelicula("Batman Begins", 140, Genero.ACCION, 4.5));
-        plataforma.agregarContenido(new Pelicula("The Dark Knight", 152, Genero.ACCION, 5.0));
-        plataforma.agregarContenido(new Pelicula("Matrix", 136, Genero.CIENCIA_FICCION, 4.8));
-        plataforma.agregarContenido(new Pelicula("Inception", 148, Genero.CIENCIA_FICCION, 4.8));
-        plataforma.agregarContenido(new Pelicula("Como si Fuera la primera vez", 130, Genero.ROMANTICA, 5));
-        plataforma.agregarContenido(new Pelicula("Loco por Merry", 148, Genero.ROMANTICA, 3));
-        plataforma.agregarContenido(new Pelicula("Actividad Paranormal", 148, Genero.TERROR, 4));
+     plataforma.getContenidos().addAll(FileUtils.leerContenido());
     }
 }
