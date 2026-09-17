@@ -2,6 +2,7 @@ package platzy.play;
 
 import platzy.play.contenido.Genero;
 import platzy.play.contenido.Pelicula;
+import platzy.play.excepcion.PeliculaExistenteException;
 import platzy.play.plataforma.Plataforma;
 import platzy.play.util.ScannerUtils;
 
@@ -52,8 +53,13 @@ public class Main {
                     int duracionPelicula = ScannerUtils.capturarNumero("Cuanto dura la pelicula mins ");
                     double calificacionPelicula = ScannerUtils.capturarDecimal("tu calificacion  del 1 - 5");
 
+                    try {
+                        plataforma.agregarContenido(new Pelicula(nombrePelicula, duracionPelicula, generoPelicula, calificacionPelicula));
+                    }catch (PeliculaExistenteException e) {
+                        System.out.println(e.getMessage());
+                    }
 
-                    plataforma.agregarContenido(new Pelicula(nombrePelicula, duracionPelicula, generoPelicula, calificacionPelicula));
+
                 }
                 case MOSTRAR_TODO -> {
 
