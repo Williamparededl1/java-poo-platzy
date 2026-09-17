@@ -20,8 +20,9 @@ public class Main {
     public static final int POLULARES = 5;
     public static final int MEJOR_VALORADAS = 6;
     public static final int MAS_DURACION = 7;
-    public static final int ELIMINAR_PELICULA = 8;
-    public static final int SALIR = 9;
+    public static final int REPRODUCIR = 8;
+    public static final int ELIMINAR_PELICULA = 9;
+    public static final int SALIR = 10;
 
     public static void main(String[] args) {
         Plataforma plataforma = new Plataforma(NOMBRE_PLATAFORMA);
@@ -42,8 +43,9 @@ public class Main {
                     5. Mas Popularas
                     6. Mejor volardas
                     7. Con mas Duracion
-                    8. Eliminar Pelicula
-                    9. Salir
+                    8. Reproducir
+                    9. Eliminar Pelicula
+                    10. Salir
                     """);
             System.out.println("Opcion Elegida: "+ opcionElegida);
 
@@ -119,6 +121,18 @@ public class Main {
                     Pelicula duracion = plataforma.getMasLarga();
                     System.out.println("Con una duracion de "+ duracion.getDuracion() + " tenemos ha: \n");
                     System.out.println(duracion.obtenerFichaTecnica());
+
+                }
+                case REPRODUCIR -> {
+                    String nombrePelicula = ScannerUtils.capturarTexto("cual es nombre de la pelicula que quieres reproducir");
+                    Pelicula peliculaReproducir = plataforma.buscarPorTitulo(nombrePelicula);
+
+                    if (peliculaReproducir != null){
+                        plataforma.reproducir(peliculaReproducir);
+                    }else{
+                        System.out.println(nombrePelicula + " no se encontro en "+plataforma.getNombre());
+                    }
+
 
                 }
                 case ELIMINAR_PELICULA -> {

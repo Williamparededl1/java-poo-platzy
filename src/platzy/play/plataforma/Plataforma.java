@@ -5,18 +5,18 @@ import platzy.play.contenido.Pelicula;
 import platzy.play.contenido.ResumenContenido;
 import platzy.play.excepcion.PeliculaExistenteException;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Plataforma {
 
     private String nombre;
     private List<Pelicula> contenido;
+    private Map<Pelicula, Integer> visualizaciones;
 
     public Plataforma(String nombre) {
         this.nombre = nombre;
         this.contenido = new ArrayList<>();
+        this.visualizaciones = new HashMap<>();
     }
 
     public void agregarContenido(Pelicula pelicula) {
@@ -28,6 +28,22 @@ public class Plataforma {
         }
 
         contenido.add(pelicula);
+
+    }
+
+    public void reproducir(Pelicula pelicula) {
+
+        this.contarVisualizaciones(pelicula);
+        pelicula.reprodducir();
+
+    }
+
+    private void contarVisualizaciones(Pelicula pelicula) {
+
+        int conteoActual = visualizaciones.getOrDefault(pelicula, 0);
+        System.out.println( pelicula.getTitulo()+ " se ha reproducido " + conteoActual + " veces");
+        visualizaciones.put(pelicula, conteoActual + 1);
+
     }
 
     public List<String> getTitulos() {
