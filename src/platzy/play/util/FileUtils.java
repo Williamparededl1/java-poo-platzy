@@ -6,6 +6,7 @@ import platzy.play.contenido.Pelicula;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,30 @@ public class FileUtils {
 
     public static final String NOMBRE_ARCHIVO = "Contenido.txt";
     public static final String SEPARADOR = "|";
+
+    public static void escribirContenido(Pelicula pelicula) {
+
+
+
+        String linea = String.join(SEPARADOR,
+                pelicula.getTitulo(),
+                String.valueOf(pelicula.getDuracion()),
+                pelicula.getGenero().name(),
+                String.valueOf(pelicula.getCalificacion()),
+                pelicula.getFechaEstreno().toString());
+
+        try{
+            Files.writeString(Paths.get(NOMBRE_ARCHIVO),
+                    linea+ System.lineSeparator(),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND);
+        }catch (IOException e){
+            System.out.println("ocurrio un error al escribir los datos :"+e.getMessage());
+        }
+
+
+
+    }
 
     public static List<Pelicula> leerContenido() {
         List<Pelicula> lista = new ArrayList<>();

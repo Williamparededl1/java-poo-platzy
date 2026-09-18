@@ -4,6 +4,7 @@ import platzy.play.contenido.Genero;
 import platzy.play.contenido.Pelicula;
 import platzy.play.contenido.ResumenContenido;
 import platzy.play.excepcion.PeliculaExistenteException;
+import platzy.play.util.FileUtils;
 
 import java.util.*;
 
@@ -26,6 +27,8 @@ public class Plataforma {
         if (existente != null) {
             throw new PeliculaExistenteException(pelicula.getTitulo());
         }
+
+        FileUtils.escribirContenido(pelicula);
 
         contenido.add(pelicula);
 
