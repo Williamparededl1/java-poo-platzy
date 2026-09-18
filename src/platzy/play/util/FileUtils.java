@@ -1,5 +1,7 @@
 package platzy.play.util;
 
+import platzy.play.contenido.Contenido;
+import platzy.play.contenido.Documental;
 import platzy.play.contenido.Genero;
 import platzy.play.contenido.Pelicula;
 
@@ -15,21 +17,30 @@ public class FileUtils {
 
     public static final String NOMBRE_ARCHIVO = "Contenido.txt";
     public static final String SEPARADOR = "|";
+    public static final String TIPO_PELICULA = "PELICULA";
+    public static final String TIPO_DOCUMENTAL = "DOCUMENTAL";
 
-    public static void escribirContenido(Pelicula pelicula) {
+    public static void escribirContenido(Contenido contenido) {
 
 
 
         String linea = String.join(SEPARADOR,
-                pelicula.getTitulo(),
-                String.valueOf(pelicula.getDuracion()),
-                pelicula.getGenero().name(),
-                String.valueOf(pelicula.getCalificacion()),
-                pelicula.getFechaEstreno().toString());
+                contenido.getTitulo(),
+                String.valueOf(contenido.getDuracion()),
+                contenido.getGenero().name(),
+                String.valueOf(contenido.getCalificacion()),
+                contenido.getFechaEstreno().toString());
+
+        String lineaFinal;
+        if (contenido instanceof Documental documental){
+            lineaFinal = "DOCUMENTAL"+SEPARADOR+linea+SEPARADOR+documental.getNarrador();
+        }else{
+            lineaFinal = "PELICULA"+SEPARADOR+linea;
+        }
 
         try{
             Files.writeString(Paths.get(NOMBRE_ARCHIVO),
-                    linea+ System.lineSeparator(),
+                    lineaFinal+ System.lineSeparator(),
                     StandardOpenOption.CREATE,
                     StandardOpenOption.APPEND);
         }catch (IOException e){
@@ -40,23 +51,33 @@ public class FileUtils {
 
     }
 
-    public static List<Pelicula> leerContenido() {
-        List<Pelicula> lista = new ArrayList<>();
+    public static List<Contenido> leerContenido() {
+        List<Contenido> lista = new ArrayList<>();
         try {
 
             List<String> lineas =  Files.readAllLines(Paths.get(NOMBRE_ARCHIVO));
             lineas.forEach(linea ->{
                 String[] datos = linea.split("\\" + SEPARADOR);
-                if (datos.length == 5) {
-                    String titulo = datos[0];
-                    int duracion = Integer.parseInt(datos[1]);
-                    Genero genero = Genero.valueOf(datos[2].toUpperCase());
-                    double calificacion = datos[3].isBlank() ? 0 : Double.parseDouble(datos[3]);
-                    LocalDate fechaEstreno = LocalDate.parse(datos[4]);
-                    Pelicula pelicula = new Pelicula(titulo, duracion, genero, calificacion);
-                    pelicula.setFechaEstreno(fechaEstreno);
+                if ((TIPO_PELICULA.equals(datos[0]) &&datos.length == 6)||(TIPO_DOCUMENTAL.equals(datos[0]) &&datos.length == 7)) {
+                    String titulo = datos[1];
+                    int duracion = Integer.parseInt(datos[2]);
+                    Genero genero = Genero.valueOf(datos[3].toUpperCase());
+                    double calificacion = datos[4].isBlank() ? 0 : Double.parseDouble(datos[4]);
+                    LocalDate fechaEstreno = LocalDate.parse(datos[5]);
+                    Contenido contenido;
 
-                    lista.add(pelicula);
+                    if(TIPO_PELICULA.equals(datos[0])){
+
+                        contenido = new Pelicula(titulo, duracion, genero, calificacion);
+
+                    }else{
+                        String narrador = datos[6];
+                        contenido = new Documental(titulo, duracion, genero, calificacion,narrador);
+                    }
+
+                    contenido.setFechaEstreno(fechaEstreno);
+
+                    lista.add(contenido);
                 }
             });
 

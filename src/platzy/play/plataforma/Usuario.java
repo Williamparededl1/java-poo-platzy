@@ -1,6 +1,6 @@
 package platzy.play.plataforma;
 
-import platzy.play.contenido.Pelicula;
+import platzy.play.contenido.Contenido;
 
 import java.time.LocalDateTime;
 
@@ -16,9 +16,9 @@ public class Usuario {
         this.fechaRegistro = LocalDateTime.now();
     }
 
-    public void ver(Pelicula pelicula){
+    public void ver(Contenido contenido){
         System.out.println(nombre +" esta viendo.....");
-        pelicula.reprodducir();
+        contenido.reprodducir();
     }
 
 
