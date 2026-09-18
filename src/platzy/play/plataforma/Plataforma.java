@@ -39,6 +39,13 @@ public class Plataforma {
 
     }
 
+    public List<Promocionable> getContenidoPromocionables() {
+        return contenido.stream()
+                .filter(contenido -> contenido instanceof Promocionable)
+                .map(contenidoProm -> (Promocionable) contenidoProm)
+                .toList();
+    }
+
     private void contarVisualizaciones(Contenido contenido) {
 
         int conteoActual = visualizaciones.getOrDefault(contenido, 0);

@@ -33,6 +33,7 @@ public class Main {
 
             System.out.println(NOMBRE_PLATAFORMA+" v:" +VERSION+"\n");
             System.out.println("Mas de "+plataforma.getDuracionTotal()+" minutos de Entretenimiento");
+            plataforma.getContenidoPromocionables().forEach( promo -> System.out.println(promo.promocionar()));
 
             int opcionElegida = ScannerUtils.capturarNumero("""
                     
