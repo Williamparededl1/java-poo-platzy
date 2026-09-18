@@ -11,4 +11,17 @@ public class Documental extends Contenido {
     public String getNarrador() {
         return narrador;
     }
+
+    @Override
+    public void reprodducir() {
+        System.out.println("Reproduciendo el documental " +getTitulo()+ " con el narrador " +getNarrador());
+    }
+
+    @Override
+    public String obtenerFichaTecnica() {
+        return getTitulo() + " ("+ getFechaEstreno().getYear() + ")\n" +
+                "Genero: " + getGenero().toString() +"\n" +
+                "Calificacion: " + getCalificacion() +"/5 \n"+
+                "Narrador: " + getNarrador();
+    }
 }

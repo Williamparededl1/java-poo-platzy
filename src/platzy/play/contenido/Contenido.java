@@ -2,7 +2,7 @@ package platzy.play.contenido;
 
 import java.time.LocalDate;
 
-public class Contenido {
+public abstract class Contenido {
 
     private String titulo;
     private String descripcion;
@@ -26,15 +26,9 @@ public class Contenido {
         this.calificar(calificacion);
     }
 
-    public void reprodducir () {
-        System.out.println("Reproduciendo " +titulo);
-    }
+    public abstract void reprodducir ();
 
-    public String obtenerFichaTecnica () {
-        return titulo + " ("+ fechaEstreno.getYear() + ")\n" +
-                " Genero: " + genero +"\n" +
-                " Calificacion: " + calificacion +"/5";
-    }
+    public abstract String obtenerFichaTecnica ();
 
     public void calificar (double calificacion){
 
